@@ -1,26 +1,60 @@
-<div class="page-container">
-    <h1>Bienvenue à La Rochelle</h1>
-    <p>Planifiez vos vacances avec notre guide interactif.</p>
+<div class="main-content">
+    <!-- Widget Météo -->
     <div class="weather-widget">
         <div class="weather-header">
-            <h2>Météo à La Rochelle</h2>
-            <button id="refreshWeatherBtn"><i class="fas fa-sync-alt"></i></button>
+            <div>
+                <h3>Météo à La Rochelle</h3>
+                <p id="lastUpdate">Chargement...</p>
+            </div>
+            <button id="refreshWeatherBtn" title="Actualiser la météo">
+                <i class="fas fa-sync-alt"></i>
+            </button>
         </div>
-        <div id="lastUpdate"></div>
-        <div id="weatherForecast" class="carousel"></div>
+        
+        <div class="weather-carousel-container">
+            <div id="weatherForecast" class="weather-carousel">
+                <!-- Les cartes météo seront générées par JS -->
+            </div>
+        </div>
+        
         <div class="weather-controls">
-            <button id="sunnyBtn" class="weather-btn">Soleil</button>
-            <button id="rainyBtn" class="weather-btn">Pluie</button>
-            <button id="mixedBtn" class="weather-btn">Mixte</button>
-            <button id="autoBtn" class="weather-btn active">Auto</button>
+            <button id="sunnyBtn" class="weather-btn">
+                <i class="fas fa-sun"></i> Soleil
+            </button>
+            <button id="rainyBtn" class="weather-btn">
+                <i class="fas fa-cloud-rain"></i> Pluie
+            </button>
+            <button id="mixedBtn" class="weather-btn">
+                <i class="fas fa-cloud-sun"></i> Mixte
+            </button>
+            <button id="autoBtn" class="weather-btn active">
+                <i class="fas fa-robot"></i> Auto
+            </button>
         </div>
     </div>
-    <div class="progress-section">
-        <div id="progressCircle" class="progress-circle"></div>
-        <div id="progressText">0/1 jours planifiés</div>
+
+    <!-- Section Progression -->
+    <div class="progress-container">
+        <div id="progressCircle" class="progress-circle">0%</div>
+        <div id="progressText">0/10 jours planifiés</div>
     </div>
-    <div id="daysList"></div>
-    <div id="archivedDaysContainer"></div>
-    <div class="menu-panel"></div>
-    <div class="menu-overlay"></div>
+
+    <!-- Liste des jours actifs -->
+    <div id="daysList">
+        <!-- Les cartes de jours seront générées par JS -->
+    </div>
+
+    <!-- Jours archivés -->
+    <div id="archivedDaysContainer">
+        <!-- Les jours archivés seront affichés ici -->
+    </div>
 </div>
+
+<!-- Menu latéral (sera créé par JS si nécessaire) -->
+<div class="menu-overlay"></div>
+<div class="menu-panel">
+    <!-- Menu généré par JS -->
+</div>
+
+<!-- Container pour les modales -->
+<div id="modalContainer"></div>

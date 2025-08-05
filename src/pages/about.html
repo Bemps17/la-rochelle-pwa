@@ -1,4 +1,453 @@
-<div>
-    <h1>À propos</h1>
-    <p>Informations sur l'application La Rochelle PWA.</p>
+<div class="page-container">
+    <div class="page-header">
+        <h1><i class="fas fa-info-circle"></i> À propos</h1>
+        <p>Guide interactif pour vos vacances à La Rochelle</p>
+    </div>
+    
+    <div class="about-content">
+        <div class="app-info">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Progressive Web App</h3>
+                    <p>Une application moderne qui fonctionne sur tous vos appareils, même hors-ligne !</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2><i class="fas fa-star"></i> Fonctionnalités</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon sunny">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h4>Météo Adaptative</h4>
+                    <p>Les activités s'adaptent automatiquement à la météo du jour</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon planning">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4>Planning Intelligent</h4>
+                    <p>Organisez votre séjour jour par jour avec nos suggestions</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon photos">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h4>Checklist Photos</h4>
+                    <p>Ne ratez aucun lieu emblématique avec notre guide photo</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon offline">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h4>Mode Hors-ligne</h4>
+                    <p>Accédez à vos informations même sans connexion internet</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon notes">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <h4>Notes Personnelles</h4>
+                    <p>Ajoutez vos commentaires et souvenirs à chaque journée</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon theme">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h4>Mode Sombre</h4>
+                    <p>Interface adaptée pour une utilisation de jour comme de nuit</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-section">
+            <h2><i class="fas fa-cogs"></i> Technologies</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <span>CSS3</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <span>JavaScript ES6+</span>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <span>Service Workers</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-la-rochelle">
+            <h2><i class="fas fa-map-marker-alt"></i> Pourquoi La Rochelle ?</h2>
+            <div class="city-highlights">
+                <div class="highlight-card">
+                    <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=300&h=200&fit=crop" alt="Port de La Rochelle" onerror="this.style.display='none'">
+                    <div class="highlight-content">
+                        <h4>Port Historique</h4>
+                        <p>Un des plus beaux ports de France avec ses tours médiévales</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-card">
+                    <img src="https://images.unsplash.com/photo-1563789031959-4c02fddcc1ac?w=300&h=200&fit=crop" alt="Île de Ré" onerror="this.style.display='none'">
+                    <div class="highlight-content">
+                        <h4>Île de Ré</h4>
+                        <p>L'île aux villages blancs et aux marais salants</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-card">
+                    <img src="https://images.unsplash.com/photo-1571738742820-57c6d4f2c5f6?w=300&h=200&fit=crop" alt="Vélo" onerror="this.style.display='none'">
+                    <div class="highlight-content">
+                        <h4>Culture Vélo</h4>
+                        <p>Une région parfaite pour les balades à vélo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="credits-section">
+            <h2><i class="fas fa-heart"></i> Crédits</h2>
+            <div class="credits-content">
+                <p>Développé avec ❤️ pour les amoureux de La Rochelle</p>
+                <div class="credits-details">
+                    <div class="credit-item">
+                        <strong>Données météo :</strong> OpenWeatherMap API
+                    </div>
+                    <div class="credit-item">
+                        <strong>Icônes :</strong> Font Awesome
+                    </div>
+                    <div class="credit-item">
+                        <strong>Sons :</strong> Tone.js
+                    </div>
+                    <div class="credit-item">
+                        <strong>Version :</strong> 1.0.0
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions-section">
+            <button class="action-button primary" onclick="navigate('home')">
+                <i class="fas fa-home"></i>
+                Retour à l'accueil
+            </button>
+            <button class="action-button secondary" onclick="showModal('statsModal')">
+                <i class="fas fa-chart-bar"></i>
+                Voir les statistiques
+            </button>
+        </div>
+    </div>
 </div>
+
+<!-- Menu latéral -->
+<div class="menu-overlay"></div>
+<div class="menu-panel">
+    <!-- Menu généré par JS -->
+</div>
+
+<!-- Container pour les modales -->
+<div id="modalContainer"></div>
+
+<style>
+.page-container {
+    min-height: 100vh;
+    background: var(--background-gradient);
+}
+
+.page-header {
+    text-align: center;
+    padding: 20px 15px;
+    color: var(--secondary-color);
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-header p {
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.about-content {
+    padding: 0 15px 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.app-info {
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: var(--secondary-color);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+html[data-theme="dark"] .info-card {
+    background: #2D2D2D;
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.info-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.info-content p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.features-section, .tech-section, .about-la-rochelle, .credits-section {
+    background: var(--secondary-color);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+}
+
+html[data-theme="dark"] .features-section,
+html[data-theme="dark"] .tech-section,
+html[data-theme="dark"] .about-la-rochelle,
+html[data-theme="dark"] .credits-section {
+    background: #2D2D2D;
+}
+
+.features-section h2, .tech-section h2, .about-la-rochelle h2, .credits-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+html[data-theme="dark"] .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.feature-icon.sunny { background: #F39C12; }
+.feature-icon.planning { background: #27AE60; }
+.feature-icon.photos { background: #8E44AD; }
+.feature-icon.offline { background: #2980B9; }
+.feature-icon.notes { background: #E67E22; }
+.feature-icon.theme { background: #34495E; }
+
+.feature-card h4 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+}
+
+html[data-theme="dark"] .tech-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tech-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.city-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.highlight-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+html[data-theme="dark"] .highlight-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.highlight-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.highlight-content {
+    padding: 15px;
+}
+
+.highlight-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.highlight-content p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.credits-content {
+    text-align: center;
+}
+
+.credits-content p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.credits-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.credit-item {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.credit-item strong {
+    color: var(--primary-color);
+}
+
+.actions-section {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.action-button.primary {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.action-button.secondary {
+    background: var(--accent-color);
+    color: var(--text-dark);
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+    .features-grid, .city-highlights {
+        grid-template-columns: 1fr;
+    }
+    
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .actions-section {
+        flex-direction: column;
+    }
+}
+</style>
