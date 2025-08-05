@@ -1,0 +1,16 @@
+{
+    "name": "la-rochelle-pwa",
+    "version": "1.0.0",
+    "description": "Guide interactif pour vos vacances à La Rochelle",
+    "main": "src/js/app.js",
+    "scripts": {
+        "start": "serve",
+        "build": "echo 'Build script to be defined'"
+    },
+    "author": "Bertrand",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "serve": "^14.2.3"
+    }
+}

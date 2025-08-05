@@ -1,0 +1,26 @@
+<div class="page-container">
+    <h1>Bienvenue à La Rochelle</h1>
+    <p>Planifiez vos vacances avec notre guide interactif.</p>
+    <div class="weather-widget">
+        <div class="weather-header">
+            <h2>Météo à La Rochelle</h2>
+            <button id="refreshWeatherBtn"><i class="fas fa-sync-alt"></i></button>
+        </div>
+        <div id="lastUpdate"></div>
+        <div id="weatherForecast" class="carousel"></div>
+        <div class="weather-controls">
+            <button id="sunnyBtn" class="weather-btn">Soleil</button>
+            <button id="rainyBtn" class="weather-btn">Pluie</button>
+            <button id="mixedBtn" class="weather-btn">Mixte</button>
+            <button id="autoBtn" class="weather-btn active">Auto</button>
+        </div>
+    </div>
+    <div class="progress-section">
+        <div id="progressCircle" class="progress-circle"></div>
+        <div id="progressText">0/1 jours planifiés</div>
+    </div>
+    <div id="daysList"></div>
+    <div id="archivedDaysContainer"></div>
+    <div class="menu-panel"></div>
+    <div class="menu-overlay"></div>
+</div>
