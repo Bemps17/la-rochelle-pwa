@@ -295,7 +295,7 @@ window.tripData = tripData;
 let carouselPosition = 0;
 
 // Clé API Météo (remplacer par une vraie clé)
-const API_KEY = 'YOUR_VALID_API_KEY_HERE';
+const API_KEY = 'd0ed757b80035226f3a2eb7adb68f3a5';
 
 // Gestion améliorée des sons - BEAUCOUP PLUS SILENCIEUX
 let audioContext = null;
