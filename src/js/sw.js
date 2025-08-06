@@ -1,19 +1,24 @@
-const CACHE_NAME = 'la-rochelle-pwa-v1';
-const DYNAMIC_CACHE = 'la-rochelle-dynamic-v1';
+// Version 5.0 - Désenregistrement forcé
+const CACHE_NAME = 'la-rochelle-pwa-v5';
+const DYNAMIC_CACHE = 'la-rochelle-dynamic-v5';
 const urlsToCache = [
     '/',
     '/index.html',
     '/src/css/styles.css',
     '/src/js/app.js',
-    '/src/js/sw.js',
+    '/src/js/weather.js',
+    '/src/js/storage.js',
+    '/src/js/header.js',
+    '/src/js/checklist.js',
+    // DÉBOGAGE & REFACTORING: Ajout des pages HTML pour une navigation hors-ligne complète.
     '/src/pages/home.html',
+    '/src/pages/photos.html',
+    '/src/pages/planning.html',
     '/src/pages/about.html',
-    '/src/components/header.js',
-    // '/src/assets/icons/icon-192x192.png',
-    // '/src/assets/icons/icon-512x512.png',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js'
+    // DÉBOGAGE & REFACTORING: L'URL de Tone.js a été supprimée car la librairie n'est plus utilisée.
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
+
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -22,57 +27,48 @@ self.addEventListener('install', event => {
     );
 });
 
-// Amélioration de la stratégie de cache
 self.addEventListener('fetch', event => {
-    const strategies = {
-        // Stratégie Cache First pour les assets statiques
-        cacheFirst: async (cacheName) => {
-            const cache = await caches.open(cacheName);
-            try {
-                const cached = await cache.match(event.request);
-                if (cached) return cached;
-                const fetched = await fetch(event.request);
-                cache.put(event.request, fetched.clone());
-                return fetched;
-            } catch (error) {
-                const fallback = await cache.match('/offline.html');
-                return fallback;
-            }
-        },
-        // Stratégie Network First pour les données API
-        networkFirst: async (cacheName) => {
-            try {
-                const fetched = await fetch(event.request);
-                const cache = await caches.open(cacheName);
-                cache.put(event.request, fetched.clone());
-                return fetched;
-            } catch (error) {
-                const cached = await caches.match(event.request);
-                return cached || caches.match('/offline.html');
-            }
-        }
-    };
+    // DÉBOGAGE & REFACTORING: Correction de la stratégie de cache pour les API.
+    // L'URL de l'API OpenWeatherMap est maintenant gérée par une stratégie "Network First"
+    // pour garantir des données à jour, avec un fallback sur le cache si le réseau échoue.
+    const isApiRequest = event.request.url.startsWith('https://api.openweathermap.org');
 
-    // Choix de la stratégie selon l'URL
-    if (event.request.url.includes('/api/')) {
-        event.respondWith(strategies.networkFirst(DYNAMIC_CACHE));
+    if (isApiRequest) {
+        event.respondWith(
+            caches.open(DYNAMIC_CACHE).then(cache => {
+                return fetch(event.request).then(response => {
+                    cache.put(event.request, response.clone());
+                    return response;
+                }).catch(() => {
+                    return cache.match(event.request);
+                });
+            })
+        );
     } else {
-        event.respondWith(strategies.cacheFirst(CACHE_NAME));
+        // Stratégie "Cache First" pour tous les autres assets statiques.
+        event.respondWith(
+            caches.match(event.request)
+                .then(response => {
+                    return response || fetch(event.request).then(fetchRes => {
+                        return caches.open(CACHE_NAME).then(cache => {
+                            cache.put(event.request, fetchRes.clone());
+                            return fetchRes;
+                        });
+                    });
+                })
+        );
     }
 });
 
-// Nettoyage périodique du cache
+// Nettoyage des anciens caches lors de l'activation du nouveau Service Worker.
 self.addEventListener('activate', event => {
     event.waitUntil(
-        Promise.all([
-            caches.keys().then(keys => Promise.all(
-                keys.map(key => {
-                    if (key !== CACHE_NAME && key !== DYNAMIC_CACHE) {
-                        return caches.delete(key);
-                    }
-                })
-            )),
-            self.clients.claim()
-        ])
+        caches.keys().then(keys => {
+            return Promise.all(keys.map(key => {
+                if (key !== CACHE_NAME && key !== DYNAMIC_CACHE) {
+                    return caches.delete(key);
+                }
+            }));
+        }).then(() => self.clients.claim())
     );
 });

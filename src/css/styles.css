@@ -1,31 +1,68 @@
-/* Variables CSS */
+/* ✅ NOUVELLE PALETTE - Sophistiquée et Professionnelle */
 :root {
-    --primary-color: #E63946;
-    --secondary-color: #FFFFFF;
-    --accent-color: #F1C40F;
-    --text-dark: #1D1D1D;
-    --text-light: #4B4B4B;
-    --border-light: #E0E0E0;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --background-gradient: linear-gradient(135deg, #E63946 0%, #1D1D1D 100%);
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --border-radius: 15px;
-    --transition: all 0.3s ease;
+    /* 🎨 COULEURS PRINCIPALES - Blanc grisé, Noir, Bleu pétrole, Gris anthracite bleuté */
+    --primary-color: #2C5F73;          /* Bleu pétrole profond */
+    --secondary-color: #F8F9FA;        /* Blanc légèrement grisé */
+    --accent-color: #4A90A4;           /* Bleu pétrole plus clair */
+    --text-dark: #1A1A1A;             /* Noir profond */
+    --text-light: #546E7A;            /* Gris anthracite bleuté */
+    --text-muted: #78909C;            /* Gris anthracite plus clair */
+    --border-light: #E1E5E9;          /* Bordure douce */
+    --surface-color: #FFFFFF;          /* Blanc pur pour les cartes */
+    
+    /* 🌈 COULEURS D'ACCENT */
+    --success-color: #4CAF50;          /* Vert pour succès */
+    --warning-color: #FF9800;          /* Orange pour attention */
+    --error-color: #F44336;            /* Rouge pour erreurs */
+    --info-color: #2196F3;             /* Bleu pour informations */
+    
+    /* 🎯 COULEURS SPÉCIALISÉES */
+    --weather-sunny: #FFB74D;          /* Jaune doré pour soleil */
+    --weather-rainy: #546E7A;          /* Gris bleuté pour pluie */
+    --weather-mixed: #78909C;          /* Gris pour mixte */
+    
+    /* ✨ EFFETS ET OMBRES */
+    --shadow-soft: 0 2px 8px rgba(44, 95, 115, 0.08);
+    --shadow-medium: 0 4px 16px rgba(44, 95, 115, 0.12);
+    --shadow-strong: 0 8px 32px rgba(44, 95, 115, 0.16);
+    --shadow-inset: inset 0 1px 3px rgba(44, 95, 115, 0.06);
+    
+    /* 🌊 GRADIENTS ÉLÉGANTS */
+    --gradient-primary: linear-gradient(135deg, #2C5F73 0%, #1A4A5C 100%);
+    --gradient-accent: linear-gradient(135deg, #4A90A4 0%, #2C5F73 100%);
+    --gradient-surface: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    --gradient-overlay: linear-gradient(135deg, rgba(44, 95, 115, 0.9) 0%, rgba(26, 74, 92, 0.95) 100%);
+    
+    /* 📱 VARIABLES LAYOUT */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --border-radius: 12px;
+    --border-radius-lg: 16px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease;
 }
 
-/* Dark Mode */
+/* ✅ MODE SOMBRE - Palette inversée raffinée */
 html[data-theme="dark"] {
-    --primary-color: #FF6B6B;
-    --secondary-color: #1A1A1A;
-    --accent-color: #FFD60A;
-    --text-dark: #F5F5F5;
-    --text-light: #B0B0B0;
-    --border-light: #3A3A3A;
-    --background-gradient: linear-gradient(135deg, #2D2D2D 0%, #0F0F0F 100%);
+    --primary-color: #4A90A4;          /* Bleu pétrole plus clair */
+    --secondary-color: #1E1E1E;        /* Gris très sombre */
+    --accent-color: #6BB6C7;           /* Bleu clair pour contraste */
+    --text-dark: #E8EAED;             /* Blanc cassé */
+    --text-light: #9AA0A6;            /* Gris clair */
+    --text-muted: #5F6368;            /* Gris moyen */
+    --border-light: #2D2D2D;          /* Bordure sombre */
+    --surface-color: #262626;          /* Surface sombre */
+    
+    --gradient-primary: linear-gradient(135deg, #4A90A4 0%, #2C5F73 100%);
+    --gradient-accent: linear-gradient(135deg, #6BB6C7 0%, #4A90A4 100%);
+    --gradient-surface: linear-gradient(135deg, #262626 0%, #1E1E1E 100%);
+    --gradient-overlay: linear-gradient(135deg, rgba(74, 144, 164, 0.9) 0%, rgba(44, 95, 115, 0.95) 100%);
+    
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Reset */
+/* ✅ RESET ET BASE */
 * { 
     margin: 0; 
     padding: 0; 
@@ -33,7 +70,8 @@ html[data-theme="dark"] {
 }
 
 html { 
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
+    font-size: 16px;
     height: 100%;
 }
 
@@ -41,21 +79,23 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     color: var(--text-dark);
-    background: var(--background-gradient);
+    background: var(--gradient-primary);
     min-height: 100vh;
-    font-size: 16px;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-/* Header amélioré avec bouton menu plus accessible */
+/* ✅ HEADER RAFFINÉ */
 header {
-    padding: 12px 15px;
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px) saturate(1.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -63,582 +103,557 @@ header {
 }
 
 html[data-theme="dark"] header {
-    background: rgba(30, 30, 30, 0.8);
+    background: rgba(30, 30, 30, 0.9);
     border-bottom: 1px solid var(--border-light);
 }
 
 header h1 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--secondary-color);
-    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
     font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-/* Bouton menu hamburger amélioré */
+/* ✅ BOUTON MENU ÉLÉGANT */
 #menu-toggle-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--secondary-color);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     cursor: pointer;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     transition: var(--transition);
     min-width: 48px;
     min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-#menu-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: var(--accent-color);
-    transform: scale(1.05);
-}
-
-#menu-toggle-btn:active {
-    transform: scale(0.95);
-    background: var(--primary-color);
-}
-
-#menu-toggle-btn i {
-    pointer-events: none;
-    transition: var(--transition);
-}
-
-.main-content { 
-    padding: 15px; 
-}
-
-/* Widget Météo */
-.weather-widget {
-    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+}
+
+#menu-toggle-btn:hover,
+#menu-toggle-btn:focus-visible {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* ✅ CONTENU PRINCIPAL */
+.main-content { 
     padding: 20px;
-    margin-bottom: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ✅ WIDGET MÉTÉO SOPHISTIQUÉ */
+.weather-widget {
+    background: var(--gradient-surface);
+    backdrop-filter: blur(20px) saturate(1.2);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-medium);
     transition: var(--transition);
+}
+
+html[data-theme="dark"] .weather-widget {
+    background: var(--gradient-surface);
+    border-color: var(--border-light);
 }
 
 .weather-widget:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-strong);
 }
 
-.weather-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-}
-
-.weather-header div h3 {
-    font-size: 1.2rem;
-    color: var(--secondary-color);
-    margin-bottom: 4px;
-}
-
-.weather-header div p {
-    opacity: 0.8;
-    font-size: 0.8rem;
-    color: var(--secondary-color);
-}
-
-.weather-header button {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: var(--secondary-color);
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 1rem;
-}
-
-.weather-header button:hover {
-    background: var(--primary-color);
-    transform: rotate(180deg);
-}
-
-.weather-carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding: 10px 35px;
-    margin-bottom: 15px;
-}
-
-.weather-carousel {
-    display: flex;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    gap: 12px;
-    touch-action: pan-y pinch-zoom;
-}
-
+/* ✅ CARROUSEL MÉTÉO RAFFINÉ */
 .weather-forecast-card {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: var(--border-radius);
+    padding: 16px 12px;
     text-align: center;
-    color: var(--secondary-color);
+    color: var(--text-dark);
     transition: var(--transition);
     cursor: pointer;
-    border: 2px solid transparent;
-    flex: 0 0 95px;
-    min-width: 95px;
-    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    flex: 0 0 110px;
+    min-width: 110px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
 }
 
-.weather-forecast-card:hover {
+html[data-theme="dark"] .weather-forecast-card {
+    background: rgba(38, 38, 38, 0.8);
+    color: var(--text-dark);
+    border-color: var(--border-light);
+}
+
+.weather-forecast-card:hover,
+.weather-forecast-card:focus-visible {
     transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-medium);
+}
+
+html[data-theme="dark"] .weather-forecast-card:hover {
+    background: rgba(38, 38, 38, 0.95);
 }
 
 .weather-forecast-card.selected {
     border-color: var(--accent-color);
-    box-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(74, 144, 164, 0.15);
+    box-shadow: 0 0 0 2px var(--accent-color);
+    transform: scale(1.02);
 }
 
 .weather-forecast-card.today {
     border-color: var(--primary-color);
-    background: rgba(230, 57, 70, 0.3);
+    background: rgba(44, 95, 115, 0.15);
 }
 
-.weather-forecast-card .day {
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-}
-
-.weather-forecast-card .icon img {
-    width: 40px;
-    height: 40px;
-    margin: 5px 0;
-}
-
-.weather-forecast-card .temps {
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin: 5px 0;
-}
-
-.weather-forecast-card .description {
-    font-size: 0.65rem;
-    opacity: 0.9;
-    line-height: 1.2;
-}
-
-.carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    color: var(--secondary-color);
-    font-size: 1.2rem;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: var(--transition);
-    backdrop-filter: blur(5px);
-    z-index: 10;
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-arrow:hover {
-    background: var(--primary-color);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-arrow.left { left: 5px; }
-.carousel-arrow.right { right: 5px; }
-
-.weather-controls {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
+/* ✅ CONTRÔLES MÉTÉO ÉLÉGANTS */
 .weather-btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--secondary-color);
+    padding: 12px 18px;
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    background: var(--surface-color);
+    color: var(--text-dark);
     cursor: pointer;
     transition: var(--transition);
-    font-weight: 600;
-    font-size: 0.85rem;
-    backdrop-filter: blur(5px);
+    font-weight: 500;
+    font-size: 0.875rem;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     min-height: 44px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
 }
 
-.weather-btn:hover {
+.weather-btn:hover,
+.weather-btn:focus-visible {
     background: var(--accent-color);
-    color: var(--text-dark);
-    transform: translateY(-2px);
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
 }
 
 .weather-btn.active {
-    background: var(--accent-color);
-    color: var(--text-dark);
-    box-shadow: 0 4px 10px rgba(241, 196, 15, 0.4);
-}
-
-.weather-recommendation {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 12px;
-    margin: 15px 0 0;
+    background: var(--primary-color);
     color: var(--secondary-color);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    backdrop-filter: blur(5px);
-    border-left: 4px solid var(--accent-color);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-medium);
 }
 
-.weather-recommendation.sunny { 
-    background: rgba(241, 196, 15, 0.3); 
-    border-left-color: #F39C12;
-}
-.weather-recommendation.mixed { 
-    background: rgba(108, 117, 125, 0.3); 
-    border-left-color: #6C757D;
-}
-.weather-recommendation.rainy { 
-    background: rgba(52, 73, 94, 0.3); 
-    border-left-color: #34495E;
-}
-
-/* Cartes des Jours */
+/* ✅ CARTES DE JOURS SOPHISTIQUÉES */
 .day-card {
-    background: var(--secondary-color);
-    border-radius: var(--border-radius);
-    margin-bottom: 15px;
-    box-shadow: var(--shadow);
+    background: var(--gradient-surface);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-medium);
     transition: var(--transition);
     border: 1px solid var(--border-light);
     overflow: hidden;
-}
-
-html[data-theme="dark"] .day-card { 
-    background: #2D2D2D; 
 }
 
 .day-card:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-strong);
 }
 
 .day-card.archived {
     opacity: 0.7;
-    border-left: 4px solid var(--text-light);
+    border-left: 4px solid var(--text-muted);
 }
 
-.day-header {
-    padding: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
-    min-height: 60px;
-}
-
-.day-header:hover {
-    background: rgba(0, 0, 0, 0.02);
-}
-
-html[data-theme="dark"] .day-header:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.day-header h2 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 2px;
-}
-
-.day-header small {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    font-weight: normal;
-}
-
-.day-toggle-icon {
-    transition: transform 0.3s ease;
-    color: var(--text-light);
-    font-size: 1.1rem;
-    min-width: 20px;
-}
-
-.day-card.open .day-toggle-icon { 
-    transform: rotate(90deg); 
-}
-
-.day-content-collapsible {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out;
-}
-
-.day-content-inner { 
-    padding: 0 18px 18px; 
-}
-
-.weather-sections {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 18px;
-}
-
-.weather-section {
-    border-radius: 12px;
-    padding: 15px;
-    transition: var(--transition);
-}
-
-.weather-section h3 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    font-size: 1rem;
-}
-
+/* ✅ SECTIONS MÉTÉO REDESIGNÉES */
 .sunny-weather {
-    background: linear-gradient(135deg, #F1C40F, #FFFFFF);
+    background: linear-gradient(135deg, var(--weather-sunny) 0%, #FFF3E0 100%);
     color: var(--text-dark);
-    border-left: 4px solid #F39C12;
+    border-left: 4px solid var(--weather-sunny);
 }
 
 .rainy-weather {
-    background: linear-gradient(135deg, #34495E, #7F8C8D);
-    color: var(--secondary-color);
-    border-left: 4px solid #2C3E50;
+    background: linear-gradient(135deg, var(--weather-rainy) 0%, #ECEFF1 100%);
+    color: var(--surface-color);
+    border-left: 4px solid var(--weather-rainy);
 }
 
-.activity-list {
-    list-style: none;
+/* ✅ MENU SIDEBAR NOUVEAU DESIGN */
+.menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    max-width: 380px;
+    height: 100%;
+    background: var(--gradient-surface);
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
-}
-
-.activity-list li {
-    padding: 8px 0;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    transition: var(--transition);
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(44, 95, 115, 0.2);
+    border-left: 1px solid var(--border-light);
 }
 
-.activity-list li:hover {
-    transform: translateX(5px);
+.menu-panel.open { 
+    transform: translateX(0); 
 }
 
-.activity-list i {
-    color: var(--primary-color);
-    width: 20px;
-    font-size: 0.9rem;
+/* ✅ HEADER MENU */
+.menu-header {
+    padding: 24px 20px;
+    background: var(--gradient-primary);
+    color: var(--secondary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.rainy-weather .activity-list i { 
-    color: var(--secondary-color); 
-}
-
-.budget-badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 8px 15px;
-    border-radius: 20px;
+.menu-header h2 {
+    font-size: 1.25rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
+}
+
+/* ✅ STATS RAPIDES */
+.quick-stats {
+    padding: 20px;
+    display: grid;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(44, 95, 115, 0.05);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
     color: var(--secondary-color);
-    font-size: 0.85rem;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.links-section, .comments-section {
-    background: rgba(0, 0, 0, 0.02);
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
+.weather-icon { background: var(--weather-sunny); }
+.budget-icon { background: var(--success-color); }
+
+.mini-progress-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary-color) var(--progress), var(--border-light) 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-html[data-theme="dark"] .links-section,
-html[data-theme="dark"] .comments-section { 
-    background: rgba(255, 255, 255, 0.05); 
+.mini-progress-circle::before {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: var(--surface-color);
+    border-radius: 50%;
+    z-index: -1;
 }
 
-.links-section h4, .comments-section h4 {
+.mini-progress-circle span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* ✅ PROCHAINE ACTIVITÉ */
+.next-activity {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.next-activity h3 {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 12px;
-    color: var(--primary-color);
-    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
-.links-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.external-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 15px;
-    background: var(--secondary-color);
-    border-radius: 10px;
-    text-decoration: none;
-    color: var(--text-dark);
+.activity-card {
+    background: rgba(74, 144, 164, 0.08);
+    border: 1px solid rgba(74, 144, 164, 0.2);
+    border-radius: var(--border-radius);
+    padding: 16px;
     transition: var(--transition);
-    border: 1px solid var(--border-light);
-    font-size: 0.9rem;
-    min-height: 44px;
 }
 
-.external-link:hover {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-    transform: translateY(-2px);
+.activity-card.completed {
+    background: rgba(76, 175, 80, 0.08);
+    border-color: rgba(76, 175, 80, 0.2);
 }
 
-html[data-theme="dark"] .external-link { 
-    background: #4B4B4B; 
-}
-
-.comments-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.comments-header span {
-    color: var(--text-light);
-    font-size: 0.8rem;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 4px 8px;
-    border-radius: 12px;
-}
-
-.comment-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.comment-input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 2px solid var(--border-light);
-    border-radius: 25px;
-    font-size: 0.9rem;
-    transition: var(--transition);
-    background: var(--secondary-color);
-    min-height: 44px;
-}
-
-html[data-theme="dark"] .comment-input {
-    background: #4B4B4B;
+.activity-text {
+    font-size: 0.875rem;
     color: var(--text-dark);
-    border-color: #5A5A5A;
+    margin-bottom: 12px;
+    line-height: 1.4;
 }
 
-.comment-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
-}
-
-.comment-btn {
-    padding: 12px 20px;
-    background: var(--primary-color);
+.quick-action-btn {
+    background: var(--accent-color);
     color: var(--secondary-color);
     border: none;
-    border-radius: 25px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
     transition: var(--transition);
     display: flex;
     align-items: center;
     gap: 6px;
-    min-height: 44px;
 }
 
-.comment-btn:hover { 
-    background: var(--accent-color);
-    color: var(--text-dark);
+.quick-action-btn:hover {
+    background: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.celebration {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--success-color);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* ✅ ACTIONS RAPIDES */
+.quick-actions {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.quick-actions h3 {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.quick-btn {
+    background: var(--surface-color);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    min-height: 70px;
+    box-shadow: var(--shadow-soft);
+}
+
+.quick-btn:hover,
+.quick-btn:focus-visible {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border-color: var(--primary-color);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
 }
 
-.comment {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border-left: 3px solid var(--primary-color);
+.quick-btn i {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
 }
 
-html[data-theme="dark"] .comment {
-    background: rgba(255, 255, 255, 0.05);
+.quick-btn span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
-.comment-meta {
+/* ✅ NAVIGATION SECTION */
+.navigation-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.navigation-section h3 {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list li {
+    margin-bottom: 4px;
+}
+
+.nav-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: 1px solid transparent;
+}
+
+.nav-list a:hover,
+.nav-list a:focus-visible {
+    background: rgba(44, 95, 115, 0.08);
+    border-color: rgba(44, 95, 115, 0.2);
+    transform: translateX(4px);
+}
+
+.nav-list a.active {
+    background: rgba(44, 95, 115, 0.12);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.nav-list a .fas {
+    margin-right: 12px;
+    width: 16px;
+    text-align: center;
+}
+
+.nav-badge {
+    background: var(--accent-color);
+    color: var(--secondary-color);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.nav-list a.active .nav-badge {
+    background: var(--primary-color);
+}
+
+/* ✅ FOOTER MENU */
+.menu-footer {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid var(--border-light);
+    background: rgba(44, 95, 115, 0.02);
+}
+
+.app-status {
     display: flex;
     justify-content: space-between;
-    font-size: 0.8rem;
+    margin-bottom: 12px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
     color: var(--text-light);
-    margin-bottom: 6px;
 }
 
-.comment-text {
-    color: var(--text-dark);
-    font-size: 0.9rem;
-    line-height: 1.4;
+.status-item .fas.online {
+    color: var(--success-color);
 }
 
-.day-actions { 
-    text-align: center; 
-    margin-top: 15px; 
+.status-item .fas.offline {
+    color: var(--error-color);
 }
 
+.version-info {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* ✅ BOUTONS D'ACTION PRINCIPAUX */
 .action-btn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 25px;
+    border-radius: 24px;
     cursor: pointer;
     font-weight: 600;
     transition: var(--transition);
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     min-height: 44px;
+    box-shadow: var(--shadow-soft);
 }
 
 .archive-btn { 
@@ -647,322 +662,249 @@ html[data-theme="dark"] .comment {
 }
 
 .unarchive-btn { 
-    background: var(--text-light); 
+    background: var(--text-muted); 
     color: var(--secondary-color); 
 }
 
-.action-btn:hover {
+.action-btn:hover,
+.action-btn:focus-visible {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-medium);
 }
 
-/* Menu Latéral */
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 1999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(2px);
-}
-
-.menu-overlay.open { 
-    opacity: 1; 
-    visibility: visible; 
-}
-
-.menu-panel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 85%;
-    max-width: 320px;
-    height: 100%;
-    background: var(--secondary-color);
-    z-index: 2000;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-}
-
-html[data-theme="dark"] .menu-panel { 
-    background: #2D2D2D; 
-}
-
-.menu-panel.open { 
-    transform: translateX(0); 
-}
-
-.menu-panel h3 {
-    margin: 20px 0 10px;
-    color: var(--text-light);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.menu-list { 
-    list-style: none; 
-    padding: 0; 
-    margin-bottom: 10px;
-}
-
-.menu-list a {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: var(--text-dark);
-    transition: var(--transition);
-    font-weight: 500;
-    font-size: 0.95rem;
-    min-height: 48px;
-    cursor: pointer;
-}
-
-.menu-list a:hover { 
-    background-color: rgba(230, 57, 70, 0.1);
-    color: var(--primary-color);
-    transform: translateX(5px);
-}
-
-.menu-list i {
-    width: 20px;
-    text-align: center;
-    color: var(--primary-color);
-    font-size: 1.1rem;
-}
-
-/* Progression */
-.progress-container {
-    position: relative;
-    margin: 20px auto;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 12px 20px;
-    border-radius: 25px;
-    box-shadow: var(--shadow);
+/* ✅ LIENS EXTERNES */
+.external-link {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 12px 16px;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
     color: var(--text-dark);
-    font-size: 0.9rem;
-    max-width: 300px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition);
+    border: 1px solid var(--border-light);
+    font-size: 0.875rem;
+    min-height: 44px;
+    box-shadow: var(--shadow-soft);
 }
 
-html[data-theme="dark"] .progress-container { 
-    background: rgba(30, 30, 30, 0.95); 
-    border-color: var(--border-light);
+.external-link:hover,
+.external-link:focus-visible {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
 }
 
-.progress-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: conic-gradient(var(--primary-color) var(--progress-angle, 0deg), var(--border-light) 0deg);
+/* ✅ FORMULAIRES ET INPUTS */
+.comment-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    background: var(--surface-color);
+    min-height: 44px;
+    outline: none;
+    color: var(--text-dark);
+}
+
+.comment-input:focus,
+.comment-input:focus-visible {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(44, 95, 115, 0.1);
+}
+
+.comment-btn {
+    padding: 12px 20px;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: var(--transition);
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--secondary-color);
-    font-size: 0.7rem;
-    font-weight: bold;
-    position: relative;
+    gap: 8px;
+    min-height: 44px;
+    box-shadow: var(--shadow-soft);
 }
 
-.progress-circle::before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: var(--secondary-color);
-    border-radius: 50%;
-    z-index: -1;
+.comment-btn:hover,
+.comment-btn:focus-visible { 
+    background: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
 }
 
-html[data-theme="dark"] .progress-circle::before {
-    background: #2D2D2D;
-}
-
-/* Modales */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 2001;
-    backdrop-filter: blur(5px);
-    animation: fadeIn 0.3s ease;
-}
-
+/* ✅ MODALES */
 .modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--secondary-color);
-    padding: 25px;
-    border-radius: var(--border-radius);
-    max-width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: var(--shadow-lg);
-}
-
-html[data-theme="dark"] .modal-content { 
-    background: #2D2D2D; 
+    background: var(--gradient-surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-strong);
+    border: 1px solid var(--border-light);
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
     border-bottom: 1px solid var(--border-light);
 }
 
-.modal-header h3 { 
-    color: var(--primary-color); 
-    font-size: 1.2rem; 
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-light);
-    padding: 5px;
-    border-radius: 5px;
-    transition: var(--transition);
-    min-width: 30px;
-    min-height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-close:hover {
-    background: rgba(0, 0, 0, 0.1);
+.modal-close:hover,
+.modal-close:focus-visible {
+    background: rgba(44, 95, 115, 0.08);
     color: var(--primary-color);
 }
 
-/* Notifications toast améliorées */
+/* ✅ AIDE ET CONTENU HELP */
+.help-content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.help-section {
+    background: rgba(44, 95, 115, 0.04);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    margin-bottom: 16px;
+    border-left: 3px solid var(--accent-color);
+}
+
+.help-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.help-section p {
+    color: var(--text-dark);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.help-tips {
+    background: rgba(76, 175, 80, 0.06);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    border-left: 3px solid var(--success-color);
+}
+
+.help-tips h4 {
+    color: var(--success-color);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.help-tips ul {
+    list-style: none;
+    padding: 0;
+}
+
+.help-tips li {
+    color: var(--text-dark);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.help-tips li::before {
+    content: "💡";
+    position: absolute;
+    left: 0;
+    font-size: 0.8rem;
+}
+
+/* ✅ NOTIFICATIONS TOAST AMÉLIORÉES */
 .toast-notification {
-    pointer-events: auto;
-    user-select: none;
+    background: var(--gradient-primary);
+    color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-strong);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
 }
 
-/* Animations */
-@keyframes fadeIn { 
-    from { opacity: 0; transform: scale(0.9); } 
-    to { opacity: 1; transform: scale(1); } 
+/* ✅ RECOMMANDATIONS MÉTÉO REDESIGNÉES */
+.weather-recommendation {
+    background: rgba(74, 144, 164, 0.1);
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--accent-color);
 }
 
-@keyframes slideIn { 
-    from { transform: translateX(100%); opacity: 0; } 
-    to { transform: translateX(0); opacity: 1; } 
+.weather-recommendation.sunny { 
+    background: rgba(255, 183, 77, 0.1); 
+    border-left-color: var(--weather-sunny);
 }
 
-@keyframes slideOut { 
-    from { transform: translateX(0); opacity: 1; } 
-    to { transform: translateX(100%); opacity: 0; } 
+.weather-recommendation.mixed { 
+    background: rgba(120, 144, 156, 0.1); 
+    border-left-color: var(--weather-mixed);
 }
 
-/* Media Queries */
+.weather-recommendation.rainy { 
+    background: rgba(84, 110, 122, 0.1); 
+    border-left-color: var(--weather-rainy);
+}
+
+/* ✅ RESPONSIVE AMÉLIORÉ */
 @media (max-width: 600px) {
-    header {
-        padding: 10px 12px;
-    }
-    
-    header h1 {
-        font-size: 1.1rem;
-    }
-    
-    #menu-toggle-btn {
-        min-width: 44px;
-        min-height: 44px;
-        padding: 10px;
-        font-size: 1.2rem;
-    }
-    
-    .weather-forecast-card { 
-        flex: 0 0 85px; 
-        min-width: 85px; 
-    }
-    
-    .weather-carousel-container {
-        padding: 10px 30px;
-    }
-    
-    .day-header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        padding: 15px;
-    }
-    
-    .budget-badge {
-        align-self: flex-end;
-    }
-    
-    .comment-form {
-        flex-direction: column;
+    .main-content {
+        padding: 16px;
     }
     
     .menu-panel {
-        width: 95%;
+        width: 90%;
+        max-width: 320px;
     }
     
-    .weather-btn, .action-btn, .comment-btn {
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-btn {
+        flex-direction: row;
+        justify-content: flex-start;
         min-height: 44px;
+        padding: 12px 16px;
+    }
+    
+    .quick-btn i {
+        margin-bottom: 0;
+        margin-right: 8px;
+    }
+    
+    .weather-forecast-card {
+        flex: 0 0 95px;
+        min-width: 95px;
     }
 }
 
 @media (min-width: 600px) {
     .weather-forecast-card { 
-        flex: 0 0 95px; 
-        min-width: 95px; 
-    }
-    
-    .progress-container {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 0;
+        flex: 0 0 110px; 
+        min-width: 110px; 
     }
 }
 
 @media (min-width: 900px) {
-    .weather-forecast-card { 
-        flex: 0 0 90px; 
-        min-width: 90px; 
-    }
-    
-    .app-container { 
-        max-width: 900px; 
-        margin: 0 auto;
+    .main-content {
+        padding: 24px;
     }
     
     .weather-sections {
         flex-direction: row;
-        gap: 15px;
+        gap: 20px;
     }
     
     .weather-section {
@@ -970,7 +912,7 @@ html[data-theme="dark"] .modal-content {
     }
 }
 
-/* Accessibilité améliorée */
+/* ✅ PRÉFÉRENCES UTILISATEUR */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -979,32 +921,43 @@ html[data-theme="dark"] .modal-content {
     }
 }
 
-/* Focus visible pour les éléments interactifs */
+@media (prefers-contrast: high) {
+    :root {
+        --border-light: var(--text-dark);
+        --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* ✅ FOCUS ET ACCESSIBILITÉ */
 button:focus-visible,
-.external-link:focus-visible,
-.weather-forecast-card:focus-visible {
+a:focus-visible,
+input:focus-visible {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
 }
 
-/* Amélioration du contraste en mode sombre */
-html[data-theme="dark"] .weather-forecast-card {
-    border-color: #4A4A4A;
+/* ✅ SÉLECTION DE TEXTE */
+::selection {
+    background: var(--primary-color);
+    color: var(--secondary-color);
 }
 
-html[data-theme="dark"] .weather-forecast-card.selected {
-    border-color: var(--accent-color);
+/* ✅ SCROLLBARS STYLISÉES */
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-/* Masquer les éléments hors écran pour les lecteurs d'écran */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+::-webkit-scrollbar-track {
+    background: var(--border-light);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
 }

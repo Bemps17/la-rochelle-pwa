@@ -1,25 +1,64 @@
 {
-    "name": "Vacances La Rochelle",
-    "short_name": "La Rochelle",
-    "description": "Guide interactif pour vos vacances à La Rochelle",
+    "name": "Vacances La Rochelle - Guide PWA",
+    "short_name": "La Rochelle PWA",
+    "description": "Guide interactif pour vos vacances à La Rochelle avec météo adaptative et planning intelligent",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#E63946",
     "theme_color": "#E63946",
     "categories": [
         "travel",
-        "lifestyle"
+        "lifestyle",
+        "entertainment"
     ],
-    "orientation": "portrait",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "fr",
     "icons": [
         {
-            "src": "/src/assets/icons/icon-192x192.png",
+            "src": "/assets/icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/icons/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/icons/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/icons/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/icons/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "/src/assets/icons/icon-512x512.png",
+            "src": "/assets/icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/assets/icons/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
@@ -28,14 +67,52 @@
     "shortcuts": [
         {
             "name": "Voir la météo",
+            "short_name": "Météo",
+            "description": "Consulter les prévisions météo de La Rochelle",
             "url": "/?view=weather",
             "icons": [
                 {
-                    "src": "/src/assets/icons/weather.png",
-                    "sizes": "96x96"
+                    "src": "/assets/icons/weather-96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Planning du jour",
+            "short_name": "Planning",
+            "description": "Voir les activités prévues aujourd'hui",
+            "url": "/?page=planning",
+            "icons": [
+                {
+                    "src": "/assets/icons/calendar-96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Checklist Photos",
+            "short_name": "Photos",
+            "description": "Suivre ma progression photos",
+            "url": "/?page=photos",
+            "icons": [
+                {
+                    "src": "/assets/icons/camera-96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
                 }
             ]
         }
     ],
-    "prefer_related_applications": false
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "launch_handler": {
+        "client_mode": "focus-existing"
+    },
+    "handle_links": "preferred",
+    "capture_links": "existing-client-navigate"
 }

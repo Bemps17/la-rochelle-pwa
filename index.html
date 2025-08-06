@@ -5,16 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vacances La Rochelle</title>
     <meta name="theme-color" content="#E63946">
-    <link rel="manifest" href="public/manifest.json">
-    <!-- <link rel="apple-touch-icon" href="src/assets/icons/icon-192x192.png"> -->
-    <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="manifest" href="/public/manifest.json">
+    <link rel="icon" href="/public/favicon.ico">
+    <link rel="stylesheet" href="/src/css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
-    <script type="module" src="src/js/app.js"></script>
+    <script>
+        // Log de débogage pour vérifier le chargement du HTML
+        console.log('📄 HTML chargé');
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ DOM complètement chargé');
+            console.log('🔍 Vérification des éléments principaux:');
+            console.log('- main-content:', document.getElementById('main-content'));
+            console.log('- home-page:', document.getElementById('home-page'));
+            console.log('- planning-page:', document.getElementById('planning-page'));
+            console.log('- photos-page:', document.getElementById('photos-page'));
+        });
+    </script>
 </head>
 <body>
-    <div id="header"></div>
-    <div id="app"></div>
+    <!-- Conteneur principal -->
+    <div id="app">
+        <!-- L'en-tête sera injecté ici par header.js -->
+        <div id="header-container"></div>
+
+        <!-- Contenu principal -->
+        <main id="main-content">
+            <!-- Page d'accueil -->
+            <section id="home-page" class="page active">
+                <div class="weather-container">
+                    <div id="weather-widget"></div>
+                </div>
+                <div class="welcome-message">
+                    <h2>Bienvenue à La Rochelle !</h2>
+                    <p>Découvrez votre programme de vacances personnalisé.</p>
+                </div>
+                <div id="weather-widget-container">
+                    <div id="weatherForecast" class="weather-forecast-carousel"></div>
+                </div>
+            </section>
+
+            <!-- Page planning -->
+            <section id="planning-page" class="page">
+                <h2>Mon Planning</h2>
+                <div id="days-container" class="days-container">
+                    <!-- Les jours seront générés dynamiquement par JavaScript -->
+                </div>
+            </section>
+
+            <!-- Page photos -->
+            <section id="photos-page" class="page">
+                <h2>Mes Photos</h2>
+                <div id="photos-container" class="photos-container">
+                    <!-- Les photos seront ajoutées dynamiquement -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Menu latéral -->
+        <aside id="side-menu" class="side-menu">
+            <div class="menu-header">
+                <h3>Menu</h3>
+                <button id="close-menu" class="close-menu">&times;</button>
+            </div>
+            <nav class="menu-nav">
+                <ul class="menu-list">
+                    <li><a href="#" class="menu-link" data-page="home"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="#" class="menu-link" data-page="planning"><i class="fas fa-calendar-alt"></i> Planning</a></li>
+                    <li><a href="#" class="menu-link" data-page="photos"><i class="fas fa-images"></i> Photos</a></li>
+                    <li><a href="#" id="stats-btn" class="menu-link"><i class="fas fa-chart-bar"></i> Statistiques</a></li>
+                    <li><a href="#" id="about-btn" class="menu-link"><i class="fas fa-info-circle"></i> À propos</a></li>
+                </ul>
+            </nav>
+            <div class="menu-footer">
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i> Thème sombre
+                </button>
+            </div>
+        </aside>
+
+        <!-- Overlay pour le menu -->
+        <div id="menu-overlay" class="menu-overlay"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Script de débogage pour vérifier la structure du DOM avant le chargement de app.js
+        console.log('🔍 Script de débogage - Avant chargement de app.js');
+        console.log('📄 État du DOM:');
+        console.log('- main-content:', document.getElementById('main-content'));
+        console.log('- home-page:', document.getElementById('home-page'));
+        console.log('- planning-page:', document.getElementById('planning-page'));
+        console.log('- photos-page:', document.getElementById('photos-page'));
+        console.log('🌐 URL de la page:', window.location.href);
+    </script>
+    <script src="/src/js/app.js?v=5.0" type="module" defer></script>
 </body>
 </html>

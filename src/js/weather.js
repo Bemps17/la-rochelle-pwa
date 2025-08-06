@@ -1,8 +1,42 @@
 import { saveState } from './storage.js';
 
-const API_KEY = 'YOUR_VALID_API_KEY_HERE'; // Remplace par une clé valide
-const LA_ROCHELLE_LAT = 46.1603;
-const LA_ROCHELLE_LON = -1.1493;
+// ✅ WEATHERAPI - Plus simple et fiable qu'OpenWeatherMap
+const WEATHER_API_KEY = 'e8c92a9200ea4312b1384114250608'; // Clé gratuite sur weatherapi.com
+const LOCATION = 'La Rochelle, France';
+const WEATHER_API_URL = 'https://api.weatherapi.com/v1';
+
+// ✅ DONNÉES DE FALLBACK AMÉLIORÉES (3 jours au lieu de 10)
+const fallbackWeatherData = {
+    data: [
+        { 
+            date: "2025-08-06", 
+            day_of_week: "mercredi", 
+            description: "Plutôt nuageux", 
+            temperature_max_celsius: 27, 
+            temperature_min_celsius: 17, 
+            icon: "03d",
+            condition: "Partly cloudy"
+        },
+        { 
+            date: "2025-08-07", 
+            day_of_week: "jeudi", 
+            description: "Ensoleillé", 
+            temperature_max_celsius: 28, 
+            temperature_min_celsius: 18, 
+            icon: "01d",
+            condition: "Sunny"
+        },
+        { 
+            date: "2025-08-08", 
+            day_of_week: "vendredi", 
+            description: "Averses éparses", 
+            temperature_max_celsius: 25, 
+            temperature_min_celsius: 19, 
+            icon: "09d",
+            condition: "Patchy rain possible"
+        }
+    ]
+};
 
 export async function fetchWeatherData() {
     const refreshButton = document.getElementById('refreshWeatherBtn');
@@ -11,62 +45,48 @@ export async function fetchWeatherData() {
         refreshButton.disabled = true;
     }
     
-    showNotification('🔄 Récupération des données météo...');
+    showNotification('🔄 Récupération météo...');
     
     try {
         if (!window.appState.state.isOnline) {
             throw new Error('Mode hors-ligne actif');
         }
         
-        // Utiliser les données de fallback pour éviter les erreurs API
-        if (API_KEY === 'YOUR_VALID_API_KEY_HERE') {
-            throw new Error('Clé API non configurée - utilisation des données de test');
+        if (WEATHER_API_KEY === 'YOUR_WEATHERAPI_KEY_HERE') {
+            throw new Error('Clé WeatherAPI non configurée - utilisation des données de test');
         }
         
+        // ✅ WEATHERAPI - Un seul appel pour 3 jours
         const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${LA_ROCHELLE_LAT}&lon=${LA_ROCHELLE_LON}&cnt=40&units=metric&lang=fr&appid=${API_KEY}`
+            `${WEATHER_API_URL}/forecast.json?key=${WEATHER_API_KEY}&q=${encodeURIComponent(LOCATION)}&days=3&aqi=no&alerts=no`
         );
         
         if (!response.ok) {
-            throw new Error(`Erreur API: ${response.status}`);
+            throw new Error(`Erreur WeatherAPI: ${response.status}`);
         }
         
         const data = await response.json();
         
-        // Traiter les données pour avoir une prévision par jour
-        const dailyData = {};
-        data.list.forEach(item => {
-            const date = new Date(item.dt * 1000).toISOString().split('T')[0];
-            if (!dailyData[date]) {
-                dailyData[date] = {
-                    date,
-                    day_of_week: new Date(item.dt * 1000).toLocaleDateString('fr-FR', { weekday: 'long' }),
-                    description: item.weather[0].description,
-                    temperature_max_celsius: Math.round(item.main.temp_max),
-                    temperature_min_celsius: Math.round(item.main.temp_min),
-                    icon: item.weather[0].icon
-                };
-            } else {
-                // Mettre à jour les températures min/max
-                dailyData[date].temperature_max_celsius = Math.max(
-                    dailyData[date].temperature_max_celsius, 
-                    Math.round(item.main.temp_max)
-                );
-                dailyData[date].temperature_min_celsius = Math.min(
-                    dailyData[date].temperature_min_celsius, 
-                    Math.round(item.main.temp_min)
-                );
-            }
-        });
-        
+        // ✅ TRANSFORMATION EN FORMAT SIMPLE
         window.weatherData = {
-            data: Object.values(dailyData).slice(0, 10) // Garder seulement 10 jours
+            data: data.forecast.forecastday.map((day, index) => {
+                const date = new Date(day.date);
+                return {
+                    date: day.date,
+                    day_of_week: date.toLocaleDateString('fr-FR', { weekday: 'long' }),
+                    description: translateCondition(day.day.condition.text),
+                    temperature_max_celsius: Math.round(day.day.maxtemp_c),
+                    temperature_min_celsius: Math.round(day.day.mintemp_c),
+                    icon: getOpenWeatherIcon(day.day.condition.code, day.day.condition.text),
+                    condition: day.day.condition.text
+                };
+            })
         };
         
         updateLastUpdateTime();
         renderWeatherWidget();
         setWeatherMode(window.appState.state.weatherMode);
-        showNotification('✅ Données météo actualisées !');
+        showNotification('✅ Météo actualisée !');
         if (window.successSound) window.successSound();
         
     } catch (error) {
@@ -75,11 +95,11 @@ export async function fetchWeatherData() {
             window.appState.handleError(error, 'fetchWeatherData');
         }
         
-        // Utiliser les données de fallback
-        window.weatherData = window.fallbackWeatherData;
+        // ✅ FALLBACK SILENCIEUX
+        window.weatherData = fallbackWeatherData;
         updateLastUpdateTime();
         renderWeatherWidget();
-        showNotification('⚠️ Utilisation des données météo de test');
+        showNotification('📱 Données météo de test utilisées');
         
     } finally {
         if (refreshButton) {
@@ -87,6 +107,81 @@ export async function fetchWeatherData() {
             refreshButton.disabled = false;
         }
     }
+}
+
+// ✅ TRADUCTIONS FRANÇAISES
+function translateCondition(condition) {
+    const translations = {
+        'Sunny': 'Ensoleillé',
+        'Clear': 'Clair',
+        'Partly cloudy': 'Plutôt nuageux',
+        'Cloudy': 'Nuageux',
+        'Overcast': 'Couvert',
+        'Mist': 'Brouillard léger',
+        'Fog': 'Brouillard',
+        'Light rain': 'Pluie légère',
+        'Moderate rain': 'Pluie modérée',
+        'Heavy rain': 'Forte pluie',
+        'Patchy rain possible': 'Averses éparses possibles',
+        'Light rain shower': 'Averse légère',
+        'Thundery outbreaks possible': 'Orages possibles'
+    };
+    return translations[condition] || condition;
+}
+
+// ✅ CORRESPONDANCE ICÔNES OPENWEATHER
+function getOpenWeatherIcon(code, condition) {
+    const iconMap = {
+        1000: '01d', // Sunny
+        1003: '02d', // Partly cloudy
+        1006: '03d', // Cloudy
+        1009: '04d', // Overcast
+        1030: '50d', // Mist
+        1063: '10d', // Patchy rain possible
+        1066: '13d', // Patchy snow possible
+        1069: '13d', // Patchy sleet possible
+        1072: '13d', // Patchy freezing drizzle possible
+        1087: '11d', // Thundery outbreaks possible
+        1114: '13d', // Blowing snow
+        1117: '13d', // Blizzard
+        1135: '50d', // Fog
+        1147: '50d', // Freezing fog
+        1150: '09d', // Patchy light drizzle
+        1153: '09d', // Light drizzle
+        1168: '09d', // Freezing drizzle
+        1171: '09d', // Heavy freezing drizzle
+        1180: '09d', // Patchy light rain
+        1183: '09d', // Light rain
+        1186: '09d', // Moderate rain at times
+        1189: '09d', // Moderate rain
+        1192: '10d', // Heavy rain at times
+        1195: '10d', // Heavy rain
+        1198: '09d', // Light freezing rain
+        1201: '09d', // Moderate or heavy freezing rain
+        1204: '13d', // Light sleet
+        1207: '13d', // Moderate or heavy sleet
+        1210: '13d', // Patchy light snow
+        1213: '13d', // Light snow
+        1216: '13d', // Patchy moderate snow
+        1219: '13d', // Moderate snow
+        1222: '13d', // Patchy heavy snow
+        1225: '13d', // Heavy snow
+        1237: '13d', // Ice pellets
+        1240: '09d', // Light rain shower
+        1243: '10d', // Moderate or heavy rain shower
+        1246: '10d', // Torrential rain shower
+        1249: '13d', // Light sleet showers
+        1252: '13d', // Moderate or heavy sleet showers
+        1255: '13d', // Light snow showers
+        1258: '13d', // Moderate or heavy snow showers
+        1261: '13d', // Light showers of ice pellets
+        1264: '13d', // Moderate or heavy showers of ice pellets
+        1273: '11d', // Patchy light rain with thunder
+        1276: '11d', // Moderate or heavy rain with thunder
+        1279: '11d', // Patchy light snow with thunder
+        1282: '11d'  // Moderate or heavy snow with thunder
+    };
+    return iconMap[code] || '01d';
 }
 
 function updateLastUpdateTime() {
@@ -108,13 +203,13 @@ export function renderWeatherWidget() {
     
     if (!window.weatherData || !window.weatherData.data) {
         console.warn('Données météo non disponibles');
-        carousel.innerHTML = '<p>Données météo non disponibles</p>';
+        carousel.innerHTML = '<p style="text-align: center; color: var(--text-light);">Données météo non disponibles</p>';
         return;
     }
     
     const today = new Date().toISOString().split('T')[0];
     
-    // Ajouter les flèches du carrousel
+    // ✅ RENDU OPTIMISÉ - Moins de cartes = plus fluide
     carousel.innerHTML = window.weatherData.data.map((day, index) => {
         const isToday = day.date === today;
         const type = getWeatherType(day.description);
@@ -122,11 +217,15 @@ export function renderWeatherWidget() {
         
         return `
             <div class="weather-forecast-card ${isSelected ? 'selected' : ''} ${isToday ? 'today' : ''}" 
-                 onclick="selectDayWeather(${index}, '${type}')">
+                 onclick="selectDayWeather(${index}, '${type}')"
+                 tabindex="0"
+                 role="button"
+                 aria-label="Sélectionner ${isToday ? 'aujourd\'hui' : day.day_of_week} - ${day.description}">
                 <div class="day">${isToday ? 'Aujourd\'hui' : day.day_of_week.substring(0,3)}.</div>
                 <div class="icon">
                     <img src="https://openweathermap.org/img/wn/${day.icon}.png" 
                          alt="${day.description}" 
+                         loading="lazy"
                          onerror="this.style.display='none'">
                 </div>
                 <div class="temps">${day.temperature_max_celsius}° / ${day.temperature_min_celsius}°</div>
@@ -134,26 +233,26 @@ export function renderWeatherWidget() {
             </div>`;
     }).join('');
     
-    // Ajouter les flèches du carrousel
+    // ✅ FLÈCHES DU CARROUSEL (seulement si nécessaire)
     const carouselContainer = carousel.parentElement;
-    if (carouselContainer && !carouselContainer.querySelector('.carousel-arrow')) {
+    if (carouselContainer && !carouselContainer.querySelector('.carousel-arrow') && window.weatherData.data.length > 1) {
         carouselContainer.style.position = 'relative';
         carouselContainer.insertAdjacentHTML('beforeend', `
-            <button class="carousel-arrow left" onclick="scrollCarousel(-1)">
+            <button class="carousel-arrow left" onclick="scrollCarousel(-1)" aria-label="Jour précédent">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="carousel-arrow right" onclick="scrollCarousel(1)">
+            <button class="carousel-arrow right" onclick="scrollCarousel(1)" aria-label="Jour suivant">
                 <i class="fas fa-chevron-right"></i>
             </button>
         `);
     }
     
-    // Mettre à jour les boutons météo
+    // ✅ MISE À JOUR BOUTONS MÉTÉO
     document.querySelectorAll('.weather-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.getElementById(window.appState.state.weatherMode + 'Btn');
     if (activeBtn) activeBtn.classList.add('active');
     
-    // Ajuster la position du carrousel
+    // ✅ POSITION CARROUSEL OPTIMISÉE
     updateCarouselPosition();
 }
 
@@ -161,10 +260,11 @@ function updateCarouselPosition() {
     const carousel = document.getElementById('weatherForecast');
     if (!carousel) return;
     
-    const cardWidth = 100; // largeur approximative d'une carte + gap
+    const cardWidth = 110; // Largeur ajustée pour 3 jours
     const visibleCards = window.innerWidth >= 900 ? 3 : window.innerWidth >= 600 ? 2 : 1;
     const maxData = window.weatherData ? window.weatherData.data.length : 0;
     
+    // ✅ MOINS DE CALCULS - 3 jours max
     window.carouselPosition = Math.max(0, Math.min(
         window.appState.state.selectedDayIndex - Math.floor(visibleCards / 2), 
         maxData - visibleCards
@@ -189,18 +289,24 @@ export function setWeatherMode(mode) {
     showWeatherRecommendation(window.appState.state.weatherMode, selectedDay);
 }
 
-// Fonction globale pour la sélection de jour
+// ✅ FONCTION GLOBALE OPTIMISÉE
 window.selectDayWeather = function(index, type) {
-    window.appState.state.selectedDayIndex = index;
-    setWeatherMode('auto');
-    if (window.clickSound) window.clickSound();
+    if (index >= 0 && index < window.weatherData.data.length) {
+        window.appState.state.selectedDayIndex = index;
+        setWeatherMode('auto');
+        if (window.clickSound) window.clickSound();
+    }
 };
 
 function getWeatherType(description) {
     if (!description) return 'mixed';
     const desc = description.toLowerCase();
-    if (desc.includes('pluie') || desc.includes('averse') || desc.includes('orage')) return 'rainy';
-    if (desc.includes('nuageux') || desc.includes('couvert')) return 'mixed';
+    if (desc.includes('pluie') || desc.includes('averse') || desc.includes('orage') || desc.includes('thunder')) {
+        return 'rainy';
+    }
+    if (desc.includes('nuageux') || desc.includes('couvert') || desc.includes('brouillard')) {
+        return 'mixed';
+    }
     return 'sunny';
 }
 
@@ -215,7 +321,7 @@ function updateWeatherVisibility() {
 }
 
 function showWeatherRecommendation(mode, selectedDay) {
-    // Supprimer l'ancienne recommandation
+    // ✅ SUPPRESSION PROPRE DE L'ANCIENNE RECOMMANDATION
     const existing = document.getElementById('weatherRecommendation');
     if (existing) existing.remove();
     
@@ -225,19 +331,20 @@ function showWeatherRecommendation(mode, selectedDay) {
         case 'auto':
             if (!selectedDay) return;
             const type = getWeatherType(selectedDay.description);
-            recommendation = `<i class="fas fa-robot"></i> Aujourd'hui : ${selectedDay.description} → Mode ${type === 'sunny' ? 'Beau Temps' : type === 'rainy' ? 'Pluvieux' : 'Mixte'} activé`;
+            const modeText = type === 'sunny' ? 'Beau Temps' : type === 'rainy' ? 'Pluvieux' : 'Mixte';
+            recommendation = `<i class="fas fa-robot"></i> ${selectedDay.description} → Mode ${modeText} activé`;
             className = type;
             break;
         case 'sunny':
-            recommendation = '<i class="fas fa-sun"></i> Parfait pour Île de Ré, paddle et photos !';
+            recommendation = '<i class="fas fa-sun"></i> Parfait pour Île de Ré, vélo et photos !';
             className = 'sunny';
             break;
         case 'rainy':
-            recommendation = '<i class="fas fa-umbrella"></i> Idéal pour musées et thalasso !';
+            recommendation = '<i class="fas fa-umbrella"></i> Idéal pour musées, aquarium et thalasso !';
             className = 'rainy';
             break;
         case 'mixed':
-            recommendation = '<i class="fas fa-cloud-sun"></i> Flexible ! Préparez les deux options.';
+            recommendation = '<i class="fas fa-cloud-sun"></i> Flexible ! Activités indoor et outdoor prêtes.';
             className = 'mixed';
             break;
     }
@@ -255,42 +362,51 @@ function showWeatherRecommendation(mode, selectedDay) {
         if (weatherWidget) {
             weatherWidget.appendChild(recDiv);
             
-            setTimeout(() => {
+            // ✅ ANIMATION FLUIDE
+            requestAnimationFrame(() => {
                 recDiv.style.opacity = '1';
                 recDiv.style.transform = 'translateY(0)';
-            }, 100);
+            });
         }
     }
 }
 
+// ✅ NOTIFICATIONS OPTIMISÉES
 function showNotification(message) {
+    const existingNotification = document.querySelector('.toast-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
     const notification = document.createElement('div');
+    notification.className = 'toast-notification';
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
+        top: 80px;
         right: 20px;
         background: var(--primary-color);
         color: var(--secondary-color);
-        padding: 10px 20px;
+        padding: 10px 18px;
         border-radius: 8px;
         z-index: 3000;
         opacity: 0;
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition: all 0.3s ease;
         transform: translateY(-20px);
-        max-width: 300px;
-        word-wrap: break-word;
+        max-width: 280px;
+        font-size: 0.85rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     `;
     notification.textContent = message;
     document.body.appendChild(notification);
     
-    setTimeout(() => {
+    requestAnimationFrame(() => {
         notification.style.opacity = '1';
         notification.style.transform = 'translateY(0)';
-    }, 100);
+    });
     
     setTimeout(() => {
         notification.style.opacity = '0';
         notification.style.transform = 'translateY(-20px)';
         setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }, 2500); // Durée réduite à 2.5s
 }

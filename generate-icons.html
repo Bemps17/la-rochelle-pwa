@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'icônes PWA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            text-align: center;
+        }
+        #canvas-container {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .icon-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .icon-preview canvas {
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+        button {
+            background-color: #E63946;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #C1121F;
+        }
+        .instructions {
+            background-color: #f8f9fa;
+            border-left: 4px solid #E63946;
+            padding: 10px 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Générateur d'icônes PWA</h1>
+        
+        <div class="instructions">
+            <h3>Instructions :</h3>
+            <ol>
+                <li>Cliquez sur le bouton "Générer les icônes" ci-dessous</li>
+                <li>Les icônes s'afficheront avec un aperçu</li>
+                <li>Faites un clic droit sur chaque icône et sélectionnez "Enregistrer l'image sous..."</li>
+                <li>Enregistrez chaque icône dans le dossier <code>public/assets/icons/</code> avec le nom correspondant à sa taille (ex: icon-192x192.png)</li>
+            </ol>
+        </div>
+
+        <button id="generateBtn">Générer les icônes</button>
+        
+        <div id="canvas-container">
+            <!-- Les canevas seront ajoutés ici par JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('canvas-container');
+            const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+            
+            // Couleurs de l'application
+            const colors = {
+                primary: '#E63946',
+                secondary: '#FFFFFF',
+                text: '#1D1D1D'
+            };
+
+            function createIcon(size) {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                canvas.style.width = '100px'; // Taille d'affichage fixe
+                canvas.style.height = 'auto';
+                
+                const ctx = canvas.getContext('2d');
+                
+                // Fond
+                ctx.fillStyle = colors.primary;
+                ctx.fillRect(0, 0, size, size);
+                
+                // Texte au centre
+                ctx.fillStyle = colors.secondary;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // Ajuster la taille de la police en fonction de la taille de l'icône
+                const fontSize = Math.floor(size * 0.5);
+                ctx.font = `bold ${fontSize}px Arial`;
+                
+                // Dessiner le texte "LR" (La Rochelle)
+                ctx.fillText('LR', size / 2, size / 2);
+                
+                // Ajouter un contour pour une meilleure visibilité
+                ctx.strokeStyle = colors.secondary;
+                ctx.lineWidth = Math.max(1, size * 0.02);
+                ctx.strokeRect(size * 0.1, size * 0.1, size * 0.8, size * 0.8);
+                
+                return canvas;
+            }
+            
+            function generateIcons() {
+                container.innerHTML = ''; // Vider le conteneur
+                
+                sizes.forEach(size => {
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'icon-preview';
+                    
+                    const canvas = createIcon(size);
+                    const label = document.createElement('div');
+                    label.textContent = `${size}x${size}px`;
+                    
+                    // Créer un lien de téléchargement
+                    const link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png');
+                    link.download = `icon-${size}x${size}.png`;
+                    link.title = `Télécharger ${size}x${size}px`;
+                    
+                    // Ajouter le canevas au lien
+                    link.appendChild(canvas);
+                    
+                    // Ajouter les éléments au DOM
+                    iconDiv.appendChild(link);
+                    iconDiv.appendChild(label);
+                    container.appendChild(iconDiv);
+                });
+            }
+            
+            // Démarrer la génération au chargement de la page
+            document.getElementById('generateBtn').addEventListener('click', generateIcons);
+        });
+    </script>
+</body>
+</html>
