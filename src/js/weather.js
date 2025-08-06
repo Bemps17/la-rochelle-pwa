@@ -1,8 +1,9 @@
 import { saveState } from './storage.js';
 
-const API_KEY = 'YOUR_VALID_API_KEY_HERE'; // Remplace par une clé valide
-const LA_ROCHELLE_LAT = 46.1603;
-const LA_ROCHELLE_LON = -1.1493;
+// ✅ WEATHERAPI - Plus simple et fiable qu'OpenWeatherMap
+const WEATHER_API_KEY = 'e8c92a9200ea4312b1384114250608'; // Clé gratuite sur weatherapi.com
+const LOCATION = 'La Rochelle, France';
+const WEATHER_API_URL = 'https://api.weatherapi.com/v1';
 
 export async function fetchWeatherData() {
     const refreshButton = document.getElementById('refreshWeatherBtn');
