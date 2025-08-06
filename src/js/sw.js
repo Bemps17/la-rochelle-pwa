@@ -12,7 +12,7 @@ const urlsToCache = [
     // '/src/assets/icons/icon-192x192.png',
     // '/src/assets/icons/icon-512x512.png',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js'
+   
 ];
 self.addEventListener('install', event => {
     event.waitUntil(
